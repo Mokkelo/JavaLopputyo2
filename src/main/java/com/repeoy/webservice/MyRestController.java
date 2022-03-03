@@ -12,26 +12,28 @@ public class MyRestController {
 
     List<Student> students = new ArrayList<>();
     List<Course> courses = new ArrayList<>();
+    List<studentToCourse> studentToCourse = new ArrayList<>();
 
-    @GetMapping("home")
+
+  /*  @GetMapping("home")
     public String home(){
         return "Welcome to the webpage!";
     }
 
-    /**
+    *//*
      * Palauttaa yhden product-olion, jonka spring palauttaa
      * kutsujalle JSON muodossa:
      *      {
      *          "name": "Acer Laptop",
      *          "price": "800"
      *      }
-     */
+     *//*
     @GetMapping("product")
     public Product getProduct(){
         return new Product("Acer Laptop", 800);
     }
 
-    /**
+    *//**
      * Palauttaa kutsujalle listan tuotteita, joka muutetaan
      * kutsujalle JSON-muotoon:
      *  [
@@ -44,7 +46,7 @@ public class MyRestController {
      *          "price": "380"
      *      },
      *  ]
-     */
+     *//*
     @GetMapping("products")
     public List<Product> getProducts(){
         return List.of(
@@ -53,30 +55,30 @@ public class MyRestController {
         );
     }
 
-    /**
+    *//**
      * Ottaa vastaan luvun polkuparametina esim. /num/34
      * ja tulostaa sen palvelimen konsoliin
-     */
+     *//*
     @GetMapping("num/{luku}")
     public String getLuku( @PathVariable String luku ){
         System.out.println(luku);
         return "";
     }
 
-    /**
+    *//**
      * Ottaa vastaan kaksi lukua polkuparametreina esim. /sum/3/5
      * ja palauttaa merkkijonona lukujen summan.
-     */
+     *//*
     @GetMapping("sum/{num1}/{num2}")
     public String calcSum(@PathVariable int num1, @PathVariable int num2 ){
         Integer sum = num1+num2;
         return sum.toString();
     }
 
-    /**
+    *//**
      * Ottaa vastaan osoitteesta /summa kaksi query parametria POST-komennolla
      * ja palauttaa lukujen summan tekstinä kutsujalle.
-     */
+     *//*
     @PostMapping("summa")
     public String calcMySum(@RequestParam int x, @RequestParam int y){
         Integer sum = x + y;
@@ -92,7 +94,7 @@ public class MyRestController {
                 "width", width,
                 "height", height);
     }
-
+*/
 
 
 
@@ -133,12 +135,12 @@ public class MyRestController {
 
     @PostMapping("studentToCourse")
     public String studentToCourse(@RequestParam int kurssiID,
-                            @RequestParam int opiskleijaID
+                                  @RequestParam int opiskelijaID
     ){
 
-        Course e = new Course(courseName, teacher, grade, kurssiID);
-        courses.add(e);
-        return "kurssi  lisätty";
+        studentToCourse e = new studentToCourse(kurssiID, opiskelijaID);
+        studentToCourse.add(e);
+        return "opiskelijanumerolla" +opiskelijaID + "lisätty kurssille" + kurssiID ;
     }
 
     @GetMapping("courses")
@@ -146,21 +148,9 @@ public class MyRestController {
         return courses;
     }
 
-    @PostMapping("addtocourse")
-    public String addtocourse (@RequestParam int KurssiID,
-                               @RequestParam int opiskelijaID
-    )
-    {
-        ////////////////tahan jotain
-
-    }
-
-
-
-
     @GetMapping("ilmoitttautumiset")
-    public List<AddToCourse> getAddToCourse(){
-        if
+    public List<studentToCourse> getAddToCourse(){
+    return studentToCourse;
     }
 
 }
